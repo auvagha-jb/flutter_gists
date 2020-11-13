@@ -1,0 +1,46 @@
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:loyalty_app/models/place_location.dart';
+
+class FindStore extends StatefulWidget {
+  @override
+  _FindStoreState createState() => _FindStoreState();
+}
+
+class _FindStoreState extends State<FindStore> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: MyGoogleMap(),
+    );
+  }
+}
+
+class MyGoogleMap extends StatefulWidget {
+  final PlaceLocation initialLocation;
+  final bool isSelecting;
+
+  const MyGoogleMap({
+    Key key,
+    this.initialLocation =
+        const PlaceLocation(latitude: -1.286389, longitude: 36.817223),
+    this.isSelecting = false,
+  }) : super(key: key);
+
+  @override
+  _MyGoogleMapState createState() => _MyGoogleMapState();
+}
+
+class _MyGoogleMapState extends State<MyGoogleMap> {
+  @override
+  Widget build(BuildContext context) {
+    return GoogleMap(
+        initialCameraPosition: CameraPosition(
+      target: LatLng(
+        widget.initialLocation.latitude,
+        widget.initialLocation.longitude,
+      ),
+      zoom: 16,
+    ));
+  }
+}

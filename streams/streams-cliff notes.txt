@@ -1,0 +1,7 @@
+* cancelOnError property which true by default
+* the listen() method returns the stream subscription, which returns a value any time the 
+stream changes
+
+Stuff you can look at: 
+* merging streams
+* caching streams
