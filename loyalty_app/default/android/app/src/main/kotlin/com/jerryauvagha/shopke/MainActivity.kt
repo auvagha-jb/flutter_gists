@@ -1,0 +1,6 @@
+package com.jerryauvagha.shopke
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
