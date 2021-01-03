@@ -1,0 +1,32 @@
+void addCustomerToFirestore(ServiceResponse serviceResponse,
+      Customer customer) async {
+    User user = serviceResponse.response;
+    bool added = await _customerCollection.addCustomer(customer, user);
+
+    if (!added) {
+      changeState(ViewState.Idle);
+      _dialogService.showDialog(
+        title: signUpErrorTitle,
+        description:
+        'User registration incomplete. Please check your connection and try again',
+      );
+      return;
+    }
+
+    setSharedPreferencesForCustomer(customer);
+  }
+
+  void getCustomerFromFirestore(String uid) async {
+    final ServiceResponse serviceResponse =
+    await _customerCollection.getCustomerById(uid);
+
+    if (!serviceResponse.status) {
+      changeState(ViewState.Idle);
+      _dialogService.showDialog(
+          title: loginErrorTitle, description: serviceResponse.response);
+      return;
+    }
+
+    Customer customer = serviceResponse.response;
+    setSharedPreferencesForCustomer(customer);
+  }
